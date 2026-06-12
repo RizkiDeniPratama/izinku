@@ -1,0 +1,35 @@
+---
+interface ProcessStep {
+  step: number;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  steps: ProcessStep[];
+}
+
+const { steps } = Astro.props;
+---
+
+<div class="relative">
+  {steps.map((s, i) => (
+    <div class="flex gap-6 mb-8 last:mb-0 fade-in" style={`transition-delay: ${i * 100}ms`}>
+      <!-- Timeline -->
+      <div class="flex flex-col items-center">
+        <div class="w-12 h-12 bg-gold text-white rounded-full flex items-center justify-center font-heading font-bold text-lg shrink-0 shadow-md shadow-gold/25">
+          {s.step}
+        </div>
+        {i < steps.length - 1 && (
+          <div class="w-0.5 bg-gold/20 flex-1 mt-2"></div>
+        )}
+      </div>
+
+      <!-- Content -->
+      <div class="pb-8 last:pb-0">
+        <h4 class="font-heading text-lg font-bold text-primary mb-2">{s.title}</h4>
+        <p class="text-text-secondary text-sm leading-relaxed">{s.description}</p>
+      </div>
+    </div>
+  ))}
+</div>

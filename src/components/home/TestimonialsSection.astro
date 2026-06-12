@@ -1,0 +1,49 @@
+---
+import { testimonials } from '../../data/testimonials';
+import SectionHeading from '../SectionHeading.astro';
+---
+
+<section class="py-16 md:py-24 bg-cream-alt" id="testimonials">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <SectionHeading
+      title="Apa Kata Klien Kami"
+      subtitle="Kepercayaan klien adalah aset terbesar kami"
+    />
+
+    <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+      {testimonials.map((t, i) => (
+        <div class="card-hover bg-white rounded-2xl p-8 border border-primary/5 relative" id={`testimonial-${i}`}>
+          <!-- Quote icon -->
+          <div class="absolute top-6 right-6">
+            <svg class="w-10 h-10 text-gold/20" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H0z"/>
+            </svg>
+          </div>
+
+          <!-- Stars -->
+          <div class="flex gap-1 mb-4">
+            {[...Array(5)].map(() => (
+              <svg class="w-5 h-5 text-gold" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+            ))}
+          </div>
+
+          <p class="text-text-secondary leading-relaxed mb-6 italic">
+            "{t.quote}"
+          </p>
+
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary font-heading font-bold text-lg">
+              {t.name.charAt(0)}
+            </div>
+            <div>
+              <p class="font-semibold text-text-main text-sm">{t.name}</p>
+              <p class="text-text-secondary text-xs">{t.title}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

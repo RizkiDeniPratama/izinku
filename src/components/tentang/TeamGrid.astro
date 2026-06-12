@@ -1,0 +1,23 @@
+---
+import { team } from '../../data/team';
+
+// Exclude founder (index 0), show rest of team
+const members = team.slice(1);
+---
+
+<div class="grid sm:grid-cols-2 lg:grid-cols-2 gap-8 max-w-3xl mx-auto">
+  {members.map((m) => (
+    <div class="card-hover bg-white rounded-2xl p-6 border border-primary/5 text-center">
+      <!-- Avatar -->
+      <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+        <span class="font-heading text-2xl font-bold text-primary">
+          {m.name.split(' ').map((n) => n.charAt(0)).slice(0, 2).join('')}
+        </span>
+      </div>
+
+      <h3 class="font-heading text-lg font-bold text-primary mb-1">{m.name}</h3>
+      <p class="text-gold text-sm font-medium mb-3">{m.title}</p>
+      <p class="text-text-secondary text-sm leading-relaxed">{m.bio}</p>
+    </div>
+  ))}
+</div>

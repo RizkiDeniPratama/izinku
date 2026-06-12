@@ -1,0 +1,48 @@
+---
+interface Props {
+  title?: string;
+  subtitle?: string;
+  variant?: 'light' | 'dark';
+}
+
+const {
+  title = 'Siap Memulai Perjalanan Bisnis Anda?',
+  subtitle = 'Konsultasikan kebutuhan hukum bisnis Anda dengan tim ahli IZINKU. Gratis dan tanpa kewajiban.',
+  variant = 'dark',
+} = Astro.props;
+
+const bgClass = variant === 'dark' ? 'bg-primary' : 'bg-cream-alt';
+const textClass = variant === 'dark' ? 'text-white' : 'text-primary';
+const subtitleClass = variant === 'dark' ? 'text-white/70' : 'text-text-secondary';
+
+const whatsappNumber = import.meta.env.PUBLIC_WHATSAPP_NUMBER || '6281234567890';
+---
+
+<section class={`${bgClass} py-16 md:py-20`}>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class={`font-heading text-3xl md:text-4xl font-bold ${textClass} mb-4`}>
+      {title}
+    </h2>
+    <p class={`${subtitleClass} text-lg mb-8 max-w-2xl mx-auto`}>
+      {subtitle}
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a
+        href="/kontak"
+        class="px-8 py-3.5 bg-gold hover:bg-gold-dark text-white font-semibold rounded-lg transition-colors text-center"
+        id="cta-konsultasi"
+      >
+        Mulai Konsultasi Gratis
+      </a>
+      <a
+        href={`https://wa.me/${whatsappNumber}?text=Halo%20IZINKU%2C%20saya%20ingin%20berkonsultasi.`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class={`px-8 py-3.5 border-2 ${variant === 'dark' ? 'border-white/30 text-white hover:bg-white/10' : 'border-primary/30 text-primary hover:bg-primary/5'} font-semibold rounded-lg transition-colors text-center`}
+        id="cta-whatsapp"
+      >
+        Chat WhatsApp
+      </a>
+    </div>
+  </div>
+</section>

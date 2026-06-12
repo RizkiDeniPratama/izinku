@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ServiceProcess from '../../components/layanan/ServiceProcess.astro';
+import ServiceFAQ from '../../components/layanan/ServiceFAQ.astro';
+import CTABanner from '../../components/CTABanner.astro';
+import { services } from '../../data/services';
+
+const service = services.find((s) => s.slug === 'konsultasi-hukum')!;
+---
+
+<BaseLayout
+  title={`${service.title} | IZINKU`}
+  description={service.description}
+>
+  <Breadcrumbs items={[
+    { label: 'Layanan', href: '/layanan' },
+    { label: service.title },
+  ]} />
+
+  <!-- Hero Section -->
+  <section class="bg-primary py-16 md:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-gold/20 rounded-full mb-6">
+          <span class="text-gold text-sm font-medium">Layanan Unggulan</span>
+        </div>
+        <h1 class="font-heading text-4xl md:text-5xl font-bold text-white mb-6">
+          {service.title}
+        </h1>
+        <p class="text-white/70 text-lg leading-relaxed">
+          {service.description}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Description -->
+  <section class="py-16 md:py-24 bg-cream">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-start">
+        <div>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-primary mb-6">
+            Tentang Layanan Ini
+          </h2>
+          {service.longDescription.split('\n\n').map((p) => (
+            <p class="text-text-secondary leading-relaxed mb-4">{p}</p>
+          ))}
+        </div>
+        <div class="bg-white rounded-2xl p-8 border border-primary/5">
+          <h3 class="font-heading text-xl font-bold text-primary mb-6">
+            Keuntungan untuk Anda
+          </h3>
+          <ul class="space-y-4">
+            {service.benefits.map((b) => (
+              <li class="flex items-start gap-3">
+                <div class="w-6 h-6 bg-gold/20 rounded-full flex items-center justify-center shrink-0 mt-0.5">
+                  <svg class="w-3.5 h-3.5 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                </div>
+                <span class="text-text-secondary text-sm leading-relaxed">{b}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="py-16 md:py-24 bg-cream-alt">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-primary mb-4">
+            Bagaimana Prosesnya?
+          </h2>
+          <div class="flex justify-center"><div class="w-16 h-1 bg-gold rounded-full"></div></div>
+        </div>
+        <ServiceProcess steps={service.process} />
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 md:py-24 bg-cream">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-primary mb-4">
+            Pertanyaan Seputar {service.shortTitle}
+          </h2>
+          <div class="flex justify-center"><div class="w-16 h-1 bg-gold rounded-full"></div></div>
+        </div>
+        <ServiceFAQ items={service.faq} />
+      </div>
+    </div>
+  </section>
+
+  <CTABanner />
+</BaseLayout>

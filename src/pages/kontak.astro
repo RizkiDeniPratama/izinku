@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ContactForm from '../components/kontak/ContactForm.astro';
+import ContactInfo from '../components/kontak/ContactInfo.astro';
+import FAQAccordion from '../components/kontak/FAQAccordion.astro';
+---
+
+<BaseLayout
+  title="Hubungi Kami — Konsultasi Gratis | IZINKU"
+  description="Hubungi IZINKU untuk konsultasi hukum gratis. Isi form atau hubungi kami via WhatsApp untuk pendirian usaha, kontrak bisnis, dan konsultasi hukum."
+>
+  <!-- Page Header -->
+  <section class="bg-primary py-16 md:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="font-heading text-4xl md:text-5xl font-bold text-white mb-4">
+        Hubungi Kami
+      </h1>
+      <p class="text-white/70 text-lg max-w-2xl mx-auto">
+        Konsultasi awal gratis — ceritakan kebutuhan hukum bisnis Anda
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact Form + Info -->
+  <section class="py-16 md:py-24 bg-cream">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-5 gap-12">
+        <!-- Form (larger) -->
+        <div class="lg:col-span-3">
+          <div class="bg-white rounded-2xl p-8 border border-primary/5 relative">
+            <h2 class="font-heading text-2xl font-bold text-primary mb-2">
+              Kirim Pesan
+            </h2>
+            <p class="text-text-secondary text-sm mb-6">
+              Isi form di bawah ini dan tim kami akan menghubungi Anda dalam 1x24 jam.
+            </p>
+            <ContactForm />
+          </div>
+        </div>
+
+        <!-- Info sidebar -->
+        <div class="lg:col-span-2">
+          <ContactInfo />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 md:py-24 bg-cream-alt">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto">
+        <SectionHeading
+          title="Pertanyaan yang Sering Diajukan"
+          subtitle="Temukan jawaban untuk pertanyaan umum seputar layanan kami"
+        />
+        <FAQAccordion />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

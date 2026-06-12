@@ -1,0 +1,51 @@
+---
+import { team } from '../../data/team';
+
+const founder = team[0];
+---
+
+<section class="py-16 md:py-24 bg-cream" id="founder">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <!-- Photo placeholder -->
+      <div class="flex justify-center">
+        <div class="relative">
+          <div class="w-72 h-80 md:w-80 md:h-96 bg-primary/10 rounded-2xl overflow-hidden flex items-center justify-center">
+            <div class="text-center">
+              <div class="w-24 h-24 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span class="font-heading text-4xl font-bold text-primary">AF</span>
+              </div>
+              <p class="text-text-secondary text-sm">Foto Profil</p>
+            </div>
+          </div>
+          <!-- Decorative -->
+          <div class="absolute -bottom-3 -right-3 w-full h-full bg-gold/10 rounded-2xl -z-10"></div>
+        </div>
+      </div>
+
+      <!-- Bio -->
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-gold/20 rounded-full mb-4">
+          <span class="text-gold-dark text-sm font-medium">Pendiri IZINKU</span>
+        </div>
+        <h2 class="font-heading text-3xl md:text-4xl font-bold text-primary mb-2">
+          {founder.name}
+        </h2>
+        <p class="text-gold font-medium mb-6">{founder.title}</p>
+        <p class="text-text-secondary leading-relaxed mb-6">
+          {founder.bio}
+        </p>
+        <p class="text-text-secondary leading-relaxed mb-8">
+          Dengan visi untuk membuat layanan hukum yang terjangkau dan mudah diakses oleh pelaku UMKM, Dr. Ahmad mendirikan IZINKU pada tahun 2018. Sejak saat itu, IZINKU telah membantu lebih dari 1.500 UMKM di seluruh Indonesia untuk mendapatkan legalitas usaha mereka.
+        </p>
+
+        <!-- Credentials -->
+        <div class="flex flex-wrap gap-3">
+          <span class="px-3 py-1.5 bg-primary/10 text-primary text-xs font-medium rounded-full">Advokat Bersertifikat</span>
+          <span class="px-3 py-1.5 bg-primary/10 text-primary text-xs font-medium rounded-full">15+ Tahun Pengalaman</span>
+          <span class="px-3 py-1.5 bg-primary/10 text-primary text-xs font-medium rounded-full">FH Universitas Indonesia</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

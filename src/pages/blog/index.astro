@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import BlogCard from '../../components/blog/BlogCard.astro';
+import CTABanner from '../../components/CTABanner.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+---
+
+<BaseLayout
+  title="Blog — Artikel Hukum & Tips Bisnis | IZINKU"
+  description="Baca artikel terbaru seputar hukum bisnis, perizinan usaha, dan tips legal untuk UMKM Indonesia dari tim ahli IZINKU."
+>
+  <!-- Page Header -->
+  <section class="bg-primary py-16 md:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="font-heading text-4xl md:text-5xl font-bold text-white mb-4">
+        Blog & Artikel
+      </h1>
+      <p class="text-white/70 text-lg max-w-2xl mx-auto">
+        Wawasan hukum dan tips bisnis dari tim ahli IZINKU
+      </p>
+    </div>
+  </section>
+
+  <!-- Blog Grid -->
+  <section class="py-16 md:py-24 bg-cream">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        {posts.map((post) => (
+          <BlogCard
+            title={post.data.title}
+            description={post.data.description}
+            date={post.data.date}
+            slug={post.id}
+            image={post.data.image}
+            tags={post.data.tags}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTABanner
+    title="Butuh Konsultasi Hukum?"
+    subtitle="Tim ahli IZINKU siap membantu menjawab pertanyaan hukum bisnis Anda."
+  />
+</BaseLayout>

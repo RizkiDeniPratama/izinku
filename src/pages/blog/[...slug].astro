@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import DummyComments from '../../components/blog/DummyComments.astro';
+import CTABanner from '../../components/CTABanner.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const formattedDate = new Intl.DateTimeFormat('id-ID', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+}).format(post.data.date);
+---
+
+<BaseLayout
+  title={`${post.data.title} | Blog IZINKU`}
+  description={post.data.description}
+>
+  <Breadcrumbs items={[
+    { label: 'Blog', href: '/blog' },
+    { label: post.data.title },
+  ]} />
+
+  <article class="py-8 md:py-16 bg-cream">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Article header -->
+      <header class="mb-10">
+        <!-- Tags -->
+        <div class="flex flex-wrap gap-2 mb-4">
+          {post.data.tags.map((tag) => (
+            <span class="px-3 py-1 bg-gold/10 text-gold-dark text-xs font-medium rounded-full">
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        <h1 class="font-heading text-3xl md:text-4xl font-bold text-primary mb-4 leading-tight">
+          {post.data.title}
+        </h1>
+
+        <p class="text-text-secondary text-lg mb-6">
+          {post.data.description}
+        </p>
+
+        <!-- Author & date -->
+        <div class="flex items-center gap-4 pb-8 border-b border-primary/10">
+          <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+            <span class="text-primary font-bold text-sm">
+              {post.data.author.split(' ').map((n) => n.charAt(0)).slice(0, 2).join('')}
+            </span>
+          </div>
+          <div>
+            <p class="font-semibold text-text-main text-sm">{post.data.author}</p>
+            <p class="text-text-secondary text-xs">{formattedDate}</p>
+          </div>
+        </div>
+      </header>
+
+      <!-- Article content -->
+      <div class="prose prose-lg max-w-none
+        prose-headings:font-heading prose-headings:text-primary
+        prose-p:text-text-secondary prose-p:leading-relaxed
+        prose-a:text-gold prose-a:font-medium hover:prose-a:text-gold-dark
+        prose-strong:text-text-main
+        prose-li:text-text-secondary
+        prose-blockquote:border-l-gold prose-blockquote:text-text-secondary
+        prose-code:text-primary prose-code:bg-primary/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
+      ">
+        <Content />
+      </div>
+
+      <!-- Dummy comments -->
+      <DummyComments />
+    </div>
+  </article>
+
+  <CTABanner
+    title="Ada Pertanyaan Hukum?"
+    subtitle="Konsultasikan langsung dengan tim ahli IZINKU — gratis dan tanpa kewajiban."
+  />
+</BaseLayout>
